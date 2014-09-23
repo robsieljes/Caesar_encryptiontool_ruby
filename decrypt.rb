@@ -1,32 +1,46 @@
-puts "Give number of ceasar encryption (minimal 1, maximal 24)"
-caesar_number = gets.chomp.to_i
+# First loop for checking caesar number gets legal value
+given = true
 
-if caesar_number < 1 || caesar_number > 24
-	puts "give a number between 1 and 24"
-	caesar_number = gets.chomp
-	caesar_number = caesar_number
+while given
+	puts "Give number of ceasar encryption (minimal 1, maximum 24)"
+	caesar_number = gets.chomp.to_i
+	if caesar_number < 1 || caesar_number > 24
+		puts "Give a number between 1 and 24..."
+	else
+		given = false
+	end
 end
 
-puts "Do you want to read text from file? (choose yes or no)"
-yes_or_no = gets.chomp.downcase
+# Second loop for checking if yes or no is given
+given_yesno = true
 
-if yes_or_no == 'yes'
-	puts "Give location and name of your file (spaces will be deleted)"
-	location = gets.chomp
-	crypto = File.read(location).delete(" ")
-elsif yes_or_no == 'no'
-	puts "Give password for encryption"
-	crypto = gets.chomp.delete(" ")
+while given_yesno
+	puts "Do you want to read text from file? (yes or no)"
+	yes_or_no = gets.chomp.downcase
+	if yes_or_no == 'yes'
+		puts "Give location and name of your file (spaces will be deleted)"
+		location = gets.chomp
+		crypto = File.read(location).delete(" ")
+		given_yesno = false
+	elsif yes_or_no == 'no'
+		puts "Give password for encryption"
+		crypto = gets.chomp.delete(" ")
+		given_yesno = false
+	else
+		puts "Give yes or no"
+	end
 end
+
 
 # Make array a - z to compare
 crypt_array = ("a".."z").to_a
 
-#String where decrypted words are added
+# String where decrypted words are added
 decrypted_string = ''
 
 n = 0
 
+# Loop for comparing and changing letters
 while n < crypto.length do
 	i = 0
 	while i <= 25 do
@@ -49,5 +63,6 @@ while n < crypto.length do
 	n += 1
 end
 
+# Output
 puts decrypted_string
 File.write('decrypted.txt', decrypted_string)
