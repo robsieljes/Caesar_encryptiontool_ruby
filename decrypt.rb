@@ -4,6 +4,7 @@ caesar_number = gets.chomp.to_i
 if caesar_number < 1 || caesar_number > 24
 	puts "give a number between 1 and 24"
 	caesar_number = gets.chomp
+	caesar_number = caesar_number
 end
 
 puts "Do you want to read text from file? (choose yes or no)"
@@ -31,10 +32,10 @@ while n < crypto.length do
 	while i <= 25 do
 		# Compare a-z with crypted words
 		if crypt_array[i] === crypto[n]
-			if i <= 25-caesar_number
+			if i <= 26-caesar_number
 				decrypted_string = decrypted_string + crypt_array[i + caesar_number].to_s		
 			end
-			if i >= 25-caesar_number
+			if i >= 26-caesar_number
 				decrypted_string = decrypted_string + crypt_array[i - caesar_number].to_s
 			end
 			# End the while loop
